@@ -20,7 +20,8 @@ yarn-debug.log*
 yarn-error.log*
 
 
-#TODO add .env to your gitignore
+# .env for environment variables
+/server/.env
 __snapshots__
 
 # debug & other vs code settings
