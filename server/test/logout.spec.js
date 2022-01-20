@@ -12,6 +12,7 @@ describe("/POST logout", () => {
       .post(`/auth/logout`)
       .end((err, res) => {
         res.should.have.status(200);
+        res.should.not.have.cookie('token');
         res.text.should.have.eql("You have successfully logged out");
         done();
       });
