@@ -21,6 +21,13 @@ This is a little description about your project.
 3. Create your environment variable (.env) file
 4. Run `npm run dev` to start the server
 
+### Running Tests
+
+Prerequisite: Able to run server locally.
+
+1. Go into the server directory `cd server`
+2. Run `npm run test` to start the server
+
 ---
 
 ## Client
