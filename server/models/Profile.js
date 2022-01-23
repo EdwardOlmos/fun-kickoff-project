@@ -4,7 +4,8 @@ const profileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true
+    required: true,
+    unique: true
   },
   firstName: {
     type: String,
@@ -16,7 +17,7 @@ const profileSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ["male", "female"]
+    enum: ["male", "female", "other"]
   },
   birthDate: Date,
   phoneNumber: {
