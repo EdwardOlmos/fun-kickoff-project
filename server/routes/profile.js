@@ -11,9 +11,12 @@ const {
 
 router.route("/")
   .post(protect, validateProfile, createProfile)
-  .get(protect, getProfile)
-  .put(protect, validateProfile, updateProfile);
+  .get(protect, getAllProfiles);
 
-router.route("/all").get(protect, getAllProfiles);
+router.route("/:userId")
+  .put(protect, validateProfile, updateProfile)
+  .get(protect, getProfile);
+
+// router.route("/all").get(protect, getAllProfiles);
 
 module.exports = router;

@@ -56,11 +56,11 @@ exports.createProfile = asyncHandler(async (req, res, next) => {
   }
 });
 
-// @route GET /account-settings
+// @route GET /account-settings/:userId
 // @desc Get profile by userId
 // @access Public
 exports.getProfile = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.user.id);
+  const user = await User.findById(req.params.userId);
 
   if (!user) {
     res.status(401);
@@ -77,12 +77,12 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
   res.status(200).json({ profile: profile });
 });
 
-// @route PUT /account-settings
+// @route PUT /account-settings/:userId
 // @desc Update user profile
 // @access Public
 exports.updateProfile = asyncHandler(async (req, res, next) => {
   const body = req.body;
-  const user = await User.findById(req.user.id);
+  const user = await User.findById(req.params.userId);
 
   if (!user) {
     res.status(401);
@@ -103,7 +103,7 @@ exports.updateProfile = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @route GET /account-settings/all
+// @route GET /account-settings
 // @desc Get all profiles
 // @access Public
 exports.getAllProfiles = asyncHandler(async (req, res, next) => {
