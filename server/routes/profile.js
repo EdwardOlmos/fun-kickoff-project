@@ -17,6 +17,4 @@ router.route("/:userId")
   .put(protect, validateProfile, updateProfile)
   .get(protect, getProfile);
 
-// router.route("/all").get(protect, getAllProfiles);
-
 module.exports = router;
