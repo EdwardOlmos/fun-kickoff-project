@@ -51,8 +51,11 @@ exports.createProfile = asyncHandler(async (req, res, next) => {
       }
     });
   } else {
-    res.status(400);
-    throw new Error("A profile already exists for this user");
+    res.status(400).json({
+      error: {
+        message: "A profile already exists for this user"
+      }
+    });
   }
 });
 
@@ -69,12 +72,15 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
   
   const profile = await Profile.findOne({ userId: user._id });;  
 
-  if (!profile) {
-    res.status(404);
-    throw new Error("No profile found for this user");
+  if (profile) {
+    res.status(200).json({ profile: profile });
+  } else {
+    res.status(404).json({
+      error: {
+        message: "No profile found for this user"
+      }
+    });
   }
-
-  res.status(200).json({ profile: profile });
 });
 
 // @route PUT /account-settings/:userId
@@ -91,16 +97,19 @@ exports.updateProfile = asyncHandler(async (req, res, next) => {
 
   const newProfile = await Profile.findOneAndUpdate({ user: user._id }, body);
 
-  if (!newProfile) {
-    res.status(404);
-    throw new Error("No profile found for this user");
+  if (newProfile) {
+    res.status(200).json({
+      success: {
+        message: "Successfully updated user profile"
+      }
+    });
+  } else {
+    res.status(404).json({
+      error: {
+        message: "No profile found for this user"
+      }
+    });
   }
-
-  res.status(200).json({
-    success: {
-      message: "Successfully updated user profile"
-    }
-  });
 });
 
 // @route GET /account-settings
@@ -109,10 +118,13 @@ exports.updateProfile = asyncHandler(async (req, res, next) => {
 exports.getAllProfiles = asyncHandler(async (req, res, next) => {
   const profiles = await Profile.find();
 
-  if (!profiles.length) {
-    res.status(404);
-    throw new Error("No profiles found");
+  if (profiles.length) {
+    res.status(200).json({ profiles: profiles });
+  } else {
+    res.status(404).json({
+      error: {
+        message: "No profiles found"
+      }
+    });
   }
-
-  res.status(200).json({ profiles: profiles });
 });
